@@ -1,4 +1,3 @@
-
 import React from 'react'
 import SideBar from './Components/SideBar/SideBar'
 import PasswordUpdateForm from './Components/Inputs/PassswordForm'
@@ -7,11 +6,16 @@ import Account from './pages/Account/Account'
 import Profile from './pages/Profile/Profile'
 import PasswordPage from './pages/PasswordSettings/PasswordPage'
 import Home from './pages/Home/Home'
+import { AvatarProvider } from './Context/AvatarContext';
+import Footer from './Components/Footer/Footer'
+
 
 
 const App = () => {
   return (
+    <AvatarProvider>
     <div className='flex dark'>
+      
       <SideBar/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -20,7 +24,9 @@ const App = () => {
         <Route path="/account" element={<Account />} />
         <Route path="/password" element={<PasswordPage />} />
       </Routes>
+      
   </div>
+  </AvatarProvider>
   )
 }
 
