@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+.light {
+  --background: 245, 245, 245;
+  
+  --border: 212, 212, 212;
+  --card: 255, 255, 255;
+  
+  --copy-primary: 23, 23, 23;
+  --copy-secondary: 115, 115, 115;
+  
+  --cta: 139, 92, 246;
+  --cta-active: 124, 58, 237;
+  --cta-text: 0, 0,0;
+  
+  background: rgba(var(--background));
+  color: rgba(var(--cta-text));
+}
+  
+.dark {
+  --background: 0, 0, 0;
+  
+  --border: 38, 38, 38;
+  --card: 23, 23, 23;
+  
+  --copy-primary: 250, 250, 250;
+  --copy-secondary: 115, 115, 115;
+  
+  --cta: 99, 102, 241;
+  --cta-active: 79, 70, 229;
+  --cta-text: 255, 255, 255;
+  
+  background: rgba(var(--background));
+  color: rgba(var(--cta-text));
+}
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --breakpoint-3xl: 1440px;
+  --breakpoint-xs: 320px;
+}
