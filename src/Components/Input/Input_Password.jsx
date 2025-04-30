@@ -1,6 +1,6 @@
 // Input_Password.jsx
 import React, { useContext } from 'react';
-import { ThemeContext } from './../../Contexts/ThemeContext';
+import { ThemeContext } from './../../Context/ThemeContext';
 
 const Input_Password = ({ value, onChange, name }) => {
     const { theme } = useContext(ThemeContext);

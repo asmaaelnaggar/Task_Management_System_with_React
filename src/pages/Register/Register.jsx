@@ -3,7 +3,7 @@ import Input_Password from "../../Components/Input/Input_Password";
 import Input_Email from "../../Components/Input/Input_Email";
 import ToggleButton from "../../Components/ToggleThemeButton/ToggleButton";
 import { motion } from "framer-motion";
-import { ThemeContext } from "../../Contexts/ThemeContext";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 const handleSubmit = () => {
     alert("welcom in OnTime");
@@ -20,6 +20,7 @@ const Register = () => {
                         : "flex flex-col justify-center items-center min-h-screen w-full bg-gradient-to-r from-[#1a1a2e] via-[#16213e] to-[#0f3460] transition-all duration-500 px-4 sm:px-6 lg:px-8"
                 }
             >
+
                 <ToggleButton />
                 <figure className="fixed top-0 right-0">
                     <img src="/src/assets/icons/flowers_Top.svg" alt="" />

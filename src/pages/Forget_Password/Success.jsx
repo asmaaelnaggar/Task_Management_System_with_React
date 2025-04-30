@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import ToggleButton from '../../Components/ToggleThemeButton/ToggleButton';
 import { motion } from 'framer-motion';
-import { ThemeContext } from './../../Contexts/ThemeContext';
+import { ThemeContext } from './../../Context/ThemeContext';
 import { useNavigate } from 'react-router';
 
 const Success = () => {

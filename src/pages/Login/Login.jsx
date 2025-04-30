@@ -3,8 +3,8 @@ import Input_Password from '../../Components/Input/Input_Password'
 import Input_Email from '../../Components/Input/Input_Email';
 import ToggleButton from '../../Components/ToggleThemeButton/ToggleButton';
 import { motion } from 'framer-motion';
-import { ThemeContext } from './../../Contexts/ThemeContext';
-const login = () => {
+import { ThemeContext } from './../../Context/ThemeContext';
+const Login = () => {
     const { theme } = useContext(ThemeContext);
     return (
         <>
@@ -75,22 +75,6 @@ const login = () => {
                                     </svg>
                                     Sign In with Google</button>
                             </div>
-                            {/* facebook sign in */}
-                            {/* <div className='flex justify-center items-center mt-5 mb-5 w-2xs'>
-                            <button className=' bg-#A3E1ECFF px-6 py-2 rounded-full text-sm border-2 border#A3E1ECFF cursor-pointer hover:bg-blue-50' type="button">
-                                <svg className='inline mr-2.5' width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_347_710)">
-                                        <path d="M28.5 14.5C28.5 6.76801 22.232 0.5 14.5 0.5C6.76801 0.5 0.5 6.76801 0.5 14.5C0.5 21.4877 5.61957 27.2796 12.3125 28.3299V18.5469H8.75781V14.5H12.3125V11.4156C12.3125 7.90687 14.4027 5.96875 17.6005 5.96875C19.1318 5.96875 20.7344 6.24219 20.7344 6.24219V9.6875H18.9691C17.23 9.6875 16.6875 10.7668 16.6875 11.875V14.5H20.5703L19.9496 18.5469H16.6875V28.3299C23.3804 27.2796 28.5 21.4877 28.5 14.5Z" fill="#1877F2" />
-                                        <path d="M19.9496 18.5469L20.5703 14.5H16.6875V11.875C16.6875 10.7679 17.23 9.6875 18.9691 9.6875H20.7344V6.24219C20.7344 6.24219 19.1323 5.96875 17.6005 5.96875C14.4027 5.96875 12.3125 7.90688 12.3125 11.4156V14.5H8.75781V18.5469H12.3125V28.3299C13.762 28.5567 15.238 28.5567 16.6875 28.3299V18.5469H19.9496Z" fill="white" />
-                                    </g>
-                                    <defs>
-                                    <clipPath id="clip0_347_710">
-                                            <rect width="28" height="28" fill="white" transform="translate(0.5 0.5)" />
-                                            </clipPath>
-                                            </defs>
-                                </svg>
-                                Sign In with Facebook</button>
-                                </div> */}
                         </div>
                         {/* send to the regestration */}
                         <div className='flex gap-4 justify-center items-center mt-5 mb-5'>
@@ -106,4 +90,4 @@ const login = () => {
     )
 }
 
-export default login
+export default Login

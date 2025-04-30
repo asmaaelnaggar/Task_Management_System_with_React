@@ -3,7 +3,8 @@ import Input_Email from '../../Components/Input/Input_Email';
 import ToggleButton from '../../Components/ToggleThemeButton/ToggleButton';
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
-import { ThemeContext } from './../../Contexts/ThemeContext';
+import { ThemeContext } from './../../Context/ThemeContext';
+
 const Forget_Password = () => {
     const { theme } = useContext(ThemeContext);
     const navigate = useNavigate();
