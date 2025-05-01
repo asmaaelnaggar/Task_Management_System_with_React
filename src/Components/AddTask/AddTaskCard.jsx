@@ -73,7 +73,7 @@ const AddTaskCard = ({ isOpenModel, setIsOpenModel }) => {
                 )}
             </div>
 
-            <div className="flex justify-between mt-2">
+            <div className="flex gap-1 self-center mt-2">
                 <button
                     type="submit"
                     disabled={isSubmitting}
@@ -86,7 +86,6 @@ const AddTaskCard = ({ isOpenModel, setIsOpenModel }) => {
                     className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-xs"
                     onClick={() => setIsOpenModel(false)}>
                     Cancel
-
                 </button>
             </div>
         </form>
