@@ -2,8 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React,{useState} from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useTaskContext } from "../../Context/TaskContext";
 
 const AddTaskCard = ({ isOpenModel, setIsOpenModel }) => {
+    const { addTask } = useTaskContext();
     const[links,setLinks]=useState([]);
     const[currentLink,setCurrentLink]=useState('');
     const[linkError,setLinkError]=useState('');
@@ -28,8 +30,11 @@ const AddTaskCard = ({ isOpenModel, setIsOpenModel }) => {
     const onSubmit = (data) => {
         const formData={
             ...data,
-            links: links,
+            attachments: links,
+            completed: false,
+            createdAt: new Date().toISOString(),
         }
+        addTask(formData);
         console.log("Form Is Submitted",formData);
         setIsOpenModel(false);
 
