@@ -1,0 +1,271 @@
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { FaPen, FaTrash } from 'react-icons/fa';
+import Modal from './../Modal/Modal';
+import { ThemeContext } from '../../Context/ThemeContext';
+
+const LOCAL_STORAGE_KEY = 'task_users';
+
+const TaskCard = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isOpenModel, setIsOpenModel] = useState(false);
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [search, setSearch] = useState("");
+  const { theme } = useContext(ThemeContext);
+
+  const columns = [
+    { id: 'todo', title: 'Low', priority: 'Low' },
+    { id: 'inProgress', title: 'Medium', priority: 'Medium' },
+    { id: 'done', title: 'High', priority: 'High' },
+  ];
+
+  useEffect(() => {
+    const savedUsers = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (savedUsers) {
+      setUsers(JSON.parse(savedUsers));
+      setLoading(false);
+    } else {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            'https://raw.githubusercontent.com/asmaaelnaggar/Drag_Drop_html_css_js/refs/heads/main/ourjsonapi.json'
+          );
+          const usersWithIds = response.data.users.map(user => ({
+            ...user,
+            todos: user.todos.map((todo, idx) => ({
+              ...todo,
+              id: `${user.id}-${idx}`,
+              status: false,
+            })),
+          }));
+          setUsers(usersWithIds);
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(usersWithIds));
+          setLoading(false);
+        } catch (err) {
+          setError(err.message);
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }
+  }, []);
+
+  const updateUsers = (updatedUsers) => {
+    setUsers(updatedUsers);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedUsers));
+  };
+
+  const handleAddTask = (userId, newTask) => {
+    const updatedUsers = users.map(user => {
+      if (user.id !== userId) return user;
+
+      const newTodo = {
+        ...newTask,
+        id: `${user.id}-${user.todos.length}`,
+        status: false,
+      };
+
+      return {
+        ...user,
+        todos: [...user.todos, newTodo],
+      };
+    });
+
+    updateUsers(updatedUsers);
+  };
+
+  const handleToggleStatus = (userId, todoId) => {
+    const updatedUsers = users.map(user => {
+      if (user.id !== userId) return user;
+      return {
+        ...user,
+        todos: user.todos.map(todo => {
+          if (todo.id !== todoId) return todo;
+          return { ...todo, status: !todo.status };
+        })
+      };
+    });
+    updateUsers(updatedUsers);
+  };
+
+  const filteredUsers = users.map(user => ({
+    ...user,
+    todos: user.todos.filter(todo =>
+      todo.title.toLowerCase().includes(search.toLowerCase())
+    )
+  }));
+
+  const handleDelete = (userId, todoId) => {
+    const updated = users.map(user =>
+      user.id === userId
+        ? { ...user, todos: user.todos.filter(todo => todo.id !== todoId) }
+        : user
+    );
+    updateUsers(updated);
+  };
+
+  const handleEdit = (userId, todoId) => {
+    const updatedUsers = [...users];
+    const user = updatedUsers.find(u => u.id === userId);
+    const todoIndex = user.todos.findIndex(t => t.id === todoId);
+    const todo = user.todos[todoIndex];
+
+    const newTitle = prompt('Edit title:', todo.title);
+    const newDescription = prompt('Edit description:', todo.description);
+    const newPriority = prompt('Edit priority (Low/Medium/High):', todo.priority);
+    const newStart = prompt('Edit start date:', todo.start);
+
+    if ([newTitle, newDescription, newPriority, newStart].some(v => v === null)) return;
+    if (!['Low', 'Medium', 'High'].includes(newPriority)) {
+      alert('Priority must be Low, Medium, or High.');
+      return;
+    }
+
+    user.todos[todoIndex] = {
+      ...todo,
+      title: newTitle,
+      description: newDescription,
+      priority: newPriority,
+      start: newStart,
+    };
+    updateUsers(updatedUsers);
+  };
+
+  const handleDragStart = (userId, todoId, currentPriority) => {
+    setDraggedItem({ userId, todoId, currentPriority });
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (targetPriority) => {
+    if (!draggedItem) return;
+
+    const { userId, todoId } = draggedItem;
+    const updatedUsers = [...users];
+    const user = updatedUsers.find((u) => u.id === userId);
+    const todoIndex = user.todos.findIndex((t) => t.id === todoId);
+
+    if (user && user.todos[todoIndex] && user.todos[todoIndex].priority !== targetPriority) {
+      user.todos[todoIndex].priority = targetPriority;
+      updateUsers(updatedUsers);
+    }
+
+    setDraggedItem(null);
+  };
+
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case 'High':
+        return 'bg-red-500';
+      case 'Medium':
+        return 'bg-yellow-500';
+      case 'Low':
+        return 'bg-blue-500';
+      default:
+        return 'bg-gray-500';
+    }
+  };
+
+  const renderTasks = (priority) => {
+    return filteredUsers.map((user) =>
+      user.todos
+        .filter((todo) => todo.priority === priority)
+        .map((todo) => (
+          <div
+            key={todo.id}
+            className={`relative p-4 rounded shadow mb-4 cursor-grab transition-all duration-300 ${theme === 'light' ? 'bg-white text-slate-800' : 'bg-slate-800 text-white'
+              } ${todo.status ? 'backdrop-blur-sm opacity-70' : ''}`}
+            draggable
+            onDragStart={() => handleDragStart(user.id, todo.id, todo.priority)}
+          >
+            <input
+              type="checkbox"
+              className="absolute top-2 right-2 w-4 h-4 cursor-pointer"
+              checked={todo.status || false}
+              onChange={() => handleToggleStatus(user.id, todo.id)}
+            />
+
+            <div className="flex flex-col gap-2">
+              <div
+                className={`${getPriorityColor(todo.priority)} ${theme === 'light' ? 'text-white' : 'text-slate-800'
+                  } w-fit rounded px-2 py-1 text-xs font-medium`}
+              >
+                {todo.priority}
+              </div>
+
+              <h3 className={`text-2xl font-medium ${theme === 'light' ? 'text-gray-900' : 'text-white'} ${todo.status ? 'line-through' : ''}`}>
+                {todo.title}
+              </h3>
+
+              <p className={`text-1xl ${theme === 'light' ? 'text-gray-600' : 'text-gray-300'}`}>
+                {todo.description}
+              </p>
+              <div className="w-fit rounded px-2 py-1 text-xs">{todo.start || 'No start date'}</div>
+              <div className="w-fit rounded px-2 py-1 text-xs">{todo.end || 'No end date'}</div>
+              <hr />
+              <div className="rounded px-2 py-1 text-xs">{todo.attachments || 'No attachments'}</div>
+            </div>
+
+            <div className="flex justify-end gap-3 mt-2">
+              <FaPen className={`text-1xl ${theme === 'light' ? 'text-gray-800' : 'text-white'} cursor-pointer hover:text-blue-500`}
+                onClick={() => handleEdit(user.id, todo.id)}
+              />
+              <FaTrash className={`text-1xl ${theme === 'light' ? 'text-gray-800' : 'text-white'} cursor-pointer hover:text-red-500`}
+                onClick={() => handleDelete(user.id, todo.id)}
+              />
+            </div>
+          </div>
+        ))
+    );
+  };
+
+  if (loading) return <div className="loading">Loading data...</div>;
+  if (error) return <div className="error">Error: {error}</div>;
+
+  return (
+    <>
+      <div className="flex justify-between pr-20">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search tasks..."
+          className={`border p-2 sm:p-3 rounded-md w-full h-[48px] max-w-sm ${theme === 'light'
+            ? 'border-slate-300 bg-[#F5F5F5] text-black'
+            : 'border-slate-600 bg-slate-800 text-white'
+            } hover:border-blue-500 focus:outline-none focus:ring-1 focus:border-blue-500 transition duration-200 ease-in-out`}
+        />
+        <button
+          onClick={() => setIsOpenModel(true)}
+          className="cursor-pointer p-5 pt-0.5 pb-0.5 bg-[#246083] text-white rounded-2xl font-thin"
+        >
+          AddTask..
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full min-h-screen p-6">
+        {columns.map((column) => (
+          <div key={column.id} className="flex flex-col">
+            <span className={`h-20 ${theme === 'light' ? 'text-white bg-[#246083]' : 'text-white bg-gray-800'} flex justify-center items-center text-2xl font-bold rounded-xl p-4`}>
+              {column.title}
+            </span>
+            <div
+              className="px-4 py-4 overflow-y-auto rounded-b-xl shadow-inner space-y-4 flex-1"
+              onDragOver={handleDragOver}
+              onDrop={() => handleDrop(column.priority)}
+            >
+              {renderTasks(column.priority)}
+            </div>
+          </div>
+        ))}
+        {isOpenModel && <Modal setIsOpenModel={setIsOpenModel} onAddTask={handleAddTask} />}
+      </div>
+    </>
+  );
+};
+
+export default TaskCard;
