@@ -25,7 +25,7 @@ const Forget_Password = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4 }}>
-                    <div className={theme === 'light' ? 'relative  w-98 h-auto shadow-lg p-10 rounded-xl  bg-white' : 'relative  w-98 h-auto shadow-lg p-10 rounded-xl bg-black text-[#A6A5A5]'}>
+                    <div className={theme === 'light' ? 'relative  w-98 h-auto shadow-lg p-10 rounded-xl  bg-white' : 'relative  w-98 h-auto shadow-lg p-10 rounded-xl bg-gray-900 text-[#A6A5A5]'}>
 
                         {/* welcoming */}
                         <div className='gap-[10px]'>

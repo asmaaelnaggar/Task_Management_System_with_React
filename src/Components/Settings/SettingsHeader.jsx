@@ -1,4 +1,4 @@
-import React, {  useRef } from "react";
+import React, { useRef } from "react";
 import { FiEdit2 } from "react-icons/fi";
 import { useAvatar } from "../../Context/AvatarContext";
 

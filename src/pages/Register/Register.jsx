@@ -102,7 +102,7 @@ const Register = () => {
                         <h2 className={theme === "light"
                             ? "text-lg sm:text-xl md:text-2xl font-bold font-sans text-black"
                             : "text-lg sm:text-xl md:text-2xl font-bold font-sans text-[#A6A5A5]"}>Create Your Account.</h2>
-                        <div className="flex flex-col gap-2 justify-center items-center mt-2 mb-4">
+                        {/* <div className="flex flex-col gap-2 justify-center items-center mt-2 mb-4">
                             <div className="flex justify-center items-center mt-4 mb-4 w-full max-w-[200px] sm:max-w-[250px]">
                                 <button className={theme === 'light'
                                     ? 'bg-#A3E1ECFF flex items-center gap-1 px-6 py-2 rounded-full text-sm border-2 border#A3E1ECFF cursor-pointer transform-0.3s hover:border-blue-500'
@@ -115,7 +115,7 @@ const Register = () => {
                             <hr className="flex-grow border-t" />
                             <span className="px-3 text-xs sm:text-sm">Or with Email</span>
                             <hr className="flex-grow border-t" />
-                        </div>
+                        </div> */}
                         <div className="flex flex-col gap-1 mt-6 sm:mt-8">
                             <form onSubmit={handleSubmit} className="flex flex-col gap-6 sm:gap-8">
                                 <div className="grid grid-cols-4 sm:grid-cols-2 gap-4">
@@ -199,7 +199,7 @@ const Register = () => {
                         </div>
                     </div>
                     <div className="absolute bottom-2 opacity-50 flex justify-center w-full">
-                        <h6 className="text-xs">© Interest-based ADS | Don't steal my INFO</h6>
+                        {/* <h6 className="text-xs">© Interest-based ADS | Don't steal my INFO</h6> */}
                     </div>
                 </div>
             </motion.div>

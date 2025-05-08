@@ -3,10 +3,10 @@ import { FaRegClock, FaPaperclip } from 'react-icons/fa';
 import { ThemeContext } from '../../Context/ThemeContext';
 
 const AllTasks = ({ tasks: incomingTasks }) => {
-  const [tasks, setTasks]     = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError]     = useState(null);
-  const { theme }             = useContext(ThemeContext);
+  const [error, setError] = useState(null);
+  const { theme } = useContext(ThemeContext);
 
   const loadFromStorage = useCallback(() => {
     setLoading(true);
@@ -47,9 +47,8 @@ const AllTasks = ({ tasks: incomingTasks }) => {
   }, [incomingTasks, loadFromStorage]);
 
   return (
-    <div className={`flex flex-col gap-[20px] rounded-[20px] py-[10px] ${
-      theme === "light" ? "bg-gray-50" : "bg-black"
-    }`}>
+    <div className={`flex flex-col gap-[20px] rounded-[20px] py-[10px] ${theme === "light" ? "bg-gray-50" : "bg-gray-900900"
+      }`}>
       <h2 className="text-[#232360] font-bold text-[30px] pl-[30px]">All Tasks</h2>
       <div className="flex flex-col gap-[20px] pl-[30px] pr-[30px]">
         {loading ? (
@@ -70,9 +69,8 @@ const TaskItem = ({ task }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className={`flex h-[85px] w-[950px] rounded-[20px] py-[20px] px-[80px] justify-between ${
-      theme === "light" ? "bg-gray-50" : "bg-black"
-    }`}>
+    <div className={`flex h-[85px] w-[950px] rounded-[20px] py-[20px] px-[80px] justify-between ${theme === "light" ? "bg-gray-50" : "bg-gray-900"
+      }`}>
       {/* Start From */}
       <div className="flex flex-col gap-[10px] w-[130px]">
         <h2 className={`text-[14px] font-medium ${theme === "light" ? "text-black" : "text-white"}`}>

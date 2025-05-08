@@ -92,7 +92,7 @@ const AddTaskCard = ({ isOpenModel, setIsOpenModel }) => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className={`flex flex-col gap-3 w-150 p-4 rounded-2xl shadow-lg mx-auto ${theme === "light" ? "bg-white" : "bg-black"
+            className={`flex flex-col gap-3 w-150 p-4 rounded-2xl shadow-lg mx-auto ${theme === "light" ? "bg-white" : "bg-gray-900"
                 }`}
         >
             <input

@@ -80,13 +80,13 @@ const Login = () => {
                         </form>
                     </div>
 
-                    <div className='flex items-center mt-2'>
+                    {/* <div className='flex items-center mt-2'>
                         <hr className='flex-grow border-t' />
                         <span className='max-3 text-sm'>Or</span>
                         <hr className='flex-grow border-t' />
-                    </div>
+                    </div> */}
 
-                    <div className='flex flex-col gap-2 justify-center items-center mt-2 mb-5'>
+                    {/* <div className='flex flex-col gap-2 justify-center items-center mt-2 mb-5'>
                         <div className='flex justify-center items-center mt-5 mb-5 w-2xs'>
                             <button
                                 className={theme === 'light'
@@ -96,7 +96,7 @@ const Login = () => {
                                 <img src="/src/assets/icons/google.svg" alt="" />Sign In with Google
                             </button>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className='flex gap-4 justify-center items-center mt-5 mb-5'>
                         <p>Don't you have an account?
@@ -105,7 +105,7 @@ const Login = () => {
                     </div>
 
                     <div className='absolute bottom-2 opacity-50 mb-0 flex'>
-                        <h6>© Interest-based ADS | Don’t steal my INFO</h6>
+                        {/* <h6>© Interest-based ADS | Don’t steal my INFO</h6> */}
                     </div>
                 </div>
             </motion.div>

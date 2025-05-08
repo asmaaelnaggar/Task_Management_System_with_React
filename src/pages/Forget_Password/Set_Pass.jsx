@@ -28,7 +28,7 @@ export default function ForgotPassword() {
     const generated = Math.floor(100000 + Math.random() * 900000).toString();
     localStorage.setItem('resetEmail', email.trim());
     localStorage.setItem('resetCode', generated);
-    alert(`Your reset code is: ${generated}`); 
+    alert(`Your reset code is: ${generated}`);
     setCode(generated);
     setStep(2);
   };

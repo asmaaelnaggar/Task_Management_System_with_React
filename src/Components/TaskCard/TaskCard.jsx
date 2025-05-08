@@ -37,7 +37,7 @@ const TaskCard = () => {
             todos: user.todos.map((todo, idx) => ({
               ...todo,
               id: `${user.id}-${idx}`,
-              status: false,
+              status: false, // Add status per task
             })),
           }));
           setUsers(usersWithIds);
@@ -55,25 +55,6 @@ const TaskCard = () => {
   const updateUsers = (updatedUsers) => {
     setUsers(updatedUsers);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedUsers));
-  };
-
-  const handleAddTask = (userId, newTask) => {
-    const updatedUsers = users.map(user => {
-      if (user.id !== userId) return user;
-
-      const newTodo = {
-        ...newTask,
-        id: `${user.id}-${user.todos.length}`,
-        status: false,
-      };
-
-      return {
-        ...user,
-        todos: [...user.todos, newTodo],
-      };
-    });
-
-    updateUsers(updatedUsers);
   };
 
   const handleToggleStatus = (userId, todoId) => {
@@ -182,9 +163,10 @@ const TaskCard = () => {
             draggable
             onDragStart={() => handleDragStart(user.id, todo.id, todo.priority)}
           >
+            {/* Checkbox */}
             <input
               type="checkbox"
-              className="absolute top-2 right-2 w-4 h-4 cursor-pointer"
+              className="absolute top-2 right-2 w-4 h-4 cursor-poi"
               checked={todo.status || false}
               onChange={() => handleToggleStatus(user.id, todo.id)}
             />
@@ -197,7 +179,10 @@ const TaskCard = () => {
                 {todo.priority}
               </div>
 
-              <h3 className={`text-2xl font-medium ${theme === 'light' ? 'text-gray-900' : 'text-white'} ${todo.status ? 'line-through' : ''}`}>
+              <h3
+                className={`text-2xl font-medium ${theme === 'light' ? 'text-gray-900' : 'text-white'
+                  } ${todo.status ? 'line-through' : ''}`}
+              >
                 {todo.title}
               </h3>
 
@@ -211,10 +196,14 @@ const TaskCard = () => {
             </div>
 
             <div className="flex justify-end gap-3 mt-2">
-              <FaPen className={`text-1xl ${theme === 'light' ? 'text-gray-800' : 'text-white'} cursor-pointer hover:text-blue-500`}
+              <FaPen
+                className={`text-1xl ${theme === 'light' ? 'text-gray-900' : 'text-white'
+                  } cursor-pointer hover:text-blue-500`}
                 onClick={() => handleEdit(user.id, todo.id)}
               />
-              <FaTrash className={`text-1xl ${theme === 'light' ? 'text-gray-800' : 'text-white'} cursor-pointer hover:text-red-500`}
+              <FaTrash
+                className={`text-1xl ${theme === 'light' ? 'text-gray-800' : 'text-white'
+                  } cursor-pointer hover:text-red-500`}
                 onClick={() => handleDelete(user.id, todo.id)}
               />
             </div>
@@ -235,7 +224,7 @@ const TaskCard = () => {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search tasks..."
           className={`border p-2 sm:p-3 rounded-md w-full h-[48px] max-w-sm ${theme === 'light'
-            ? 'border-slate-300 bg-[#F5F5F5] text-black'
+            ? 'border-slate-300 bg-[#F5F5F5] text-gray-900'
             : 'border-slate-600 bg-slate-800 text-white'
             } hover:border-blue-500 focus:outline-none focus:ring-1 focus:border-blue-500 transition duration-200 ease-in-out`}
         />
@@ -250,7 +239,10 @@ const TaskCard = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full min-h-screen p-6">
         {columns.map((column) => (
           <div key={column.id} className="flex flex-col">
-            <span className={`h-20 ${theme === 'light' ? 'text-white bg-[#246083]' : 'text-white bg-gray-800'} flex justify-center items-center text-2xl font-bold rounded-xl p-4`}>
+            <span
+              className={`h-20 ${theme === 'light' ? 'text-white bg-[#246083]' : 'text-white bg-gray-800'
+                } flex justify-center items-center text-2xl font-bold rounded-xl p-4`}
+            >
               {column.title}
             </span>
             <div
@@ -262,7 +254,7 @@ const TaskCard = () => {
             </div>
           </div>
         ))}
-        {isOpenModel && <Modal setIsOpenModel={setIsOpenModel} onAddTask={handleAddTask} />}
+        {isOpenModel && <Modal setIsOpenModel={setIsOpenModel} />}
       </div>
     </>
   );
