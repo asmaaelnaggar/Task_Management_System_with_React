@@ -2,7 +2,7 @@
 
 A modern and user-friendly task management system built with React and Vite.
 
-![Application main interface screenshot](https://github.com/asmaaelnaggar/Task_Management_System_with_React/blob/main/src/assets/images/Screenshot_84.png?raw=true)
+![Application main interface screenshot](https://github.com/asmaaelnaggar/Task_Management_System_with_React/blob/main/src/assets/images/Screenshot_81.png?raw=true)
 
 ##live project
 ####Check out the live application:
