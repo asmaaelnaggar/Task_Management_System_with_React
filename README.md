@@ -23,12 +23,8 @@ able to filter and search tasks based on status (completed, in-progress).
 
 #### Core Technologies:
 - **Frontend Framework**: [React](https://react.dev/) (v18.2.0)
-- **Type Checking**: [TypeScript](https://www.typescriptlang.org/) (v4.9.5)
 - **Build Tool**: [Vite](https://vitejs.dev/) (v4.3.9)
 - **Styling**: [TailwindCSS](https://tailwindcss.com/) (v3.3.3)
-
-#### State Management:
-- [Redux Toolkit](https://redux-toolkit.js.org/) (v1.9.5)
 
 #### UI & UX:
 - [React Icons](https://react-icons.github.io/react-icons/) (v4.10.1)
