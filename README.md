@@ -163,8 +163,10 @@ This project is licensed under the **MIT License**.
 **Hasnaa Shreay** Frontend Developer 
 
 - **Phone**: 01559905128
-- **Email**: 
-- **LinkedIn**: 
+- **Email**: hassnaashreay@gmail.com
+- **LinkedIn**:https://www.linkedin.com/in/hasnaa-shreay-ba188a259
+
+
   
   
 **Menna Waled** Frontend Developer 
