@@ -5,7 +5,7 @@ import ConfirmNewPasswordInput from '../Inputs/ConfirmNewPasswordInput';
 import { ThemeContext } from '../../Context/ThemeContext';
 
 const PasswordUpdateForm = () => {
-   const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -19,10 +19,10 @@ const PasswordUpdateForm = () => {
     if (newPassword === currentPassword) {
       alert("Sorry, your new password is the same as your current password. Try another password.");
       clearFields();
-    } 
+    }
     else if (newPassword !== confirmNewPassword) {
       alert('New password and confirm password do not match!');
-    } 
+    }
     else {
       if (window.confirm("Are you sure you want to update your password?")) {
         alert("Password updated successfully!");
@@ -45,7 +45,7 @@ const PasswordUpdateForm = () => {
   };
 
   return (
-    <div className={theme==="light" ? "flex flex-col justify-between p-6 bg-[#F3F4F8] pb-[102px]":"flex flex-col justify-between p-6 bg-black pb-[102px]"}>
+    <div className={theme === "light" ? "flex flex-col justify-between p-6 bg-[#F3F4F8] pb-[102px]" : "flex flex-col justify-between p-6 bg-gray-900 pb-[102px]"}>
       <div>
         <h2 className="text-xl font-semibold mb-6">Password</h2>
         <p className='text-[#6A7181] mb-8'>Please enter your current password to change your password.</p>
