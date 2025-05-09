@@ -24,7 +24,7 @@ const ResponsiveSideBar = () => {
   }, [activeDown]);
 
   return (
-    <div className="  relative" ref={dropdownRef}>
+    <div className="relative flex gap-2 z-10 " ref={dropdownRef}>
       <figure
         className="md:hidden w-[32px] h-[48px] flex items-center"
         onClick={() => setActiveDown((prev) => !prev)}

@@ -16,6 +16,9 @@ export default [
         sourceType: 'module',
       },
     },
+    "globals": {
+      "motion": "readOnly"
+    },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
