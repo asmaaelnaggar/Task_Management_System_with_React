@@ -84,7 +84,7 @@ able to filter and search tasks based on status (completed, in-progress).
 |----------------------|---------------|--------------|
 |  Idea Proposal      |  Completed   | February 2025  |
 |  UI/UX Design       |  Completed   | March    2025  |
-|  Core Development   |  Completed   | May 2025       |
+|  Core Development   |  Completed   | April 2025       |
 |  Testing & Debugging|  In Progress | May 2025       |
 |  Final Delivery     |  Upcoming    | May 2025       |
 
